@@ -1,0 +1,255 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(135, 206, 250, 0.295);
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-family: sans-serif;
+  font-size: 2.5rem;
+  font-style: italic;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 733px;
+}
+
+.inputs-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.inputs-wrapper p {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.inputs-wrapper input {
+  font-size: 1.2rem;
+  height: 45px;
+  padding-left: 20px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+}
+
+.inputs-wrapper input::placeholder {
+  color: lightgrey;
+  font-size: 0.9rem;
+}
+
+.print-shop input {
+  width: 350px;
+  margin-right: 15px;
+}
+
+.print-shop input:focus {
+  outline: none;
+}
+
+.print-amount input {
+  width: 190px;
+  margin-right: 15px;
+}
+
+.print-amount input:focus {
+  outline: none;
+}
+
+.print-amount input::-webkit-outer-spin-button,
+.print-amount input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputs-wrapper button {
+  height: 51px;
+  padding: 0 20px;
+  font-family: sans-serif;
+  font-size: 17px;
+  border: 0;
+  background-color: rgba(101, 196, 164, 0.897);
+  border-radius: 5px;
+}
+
+.inputs-wrapper button:hover {
+  background-color: rgba(71, 138, 115, 0.897);
+  cursor: pointer;
+}
+
+.inputs-wrapper button:active {
+  background-color: rgba(101, 196, 164, 0.897);
+  cursor: pointer;
+}
+
+.total-expenses {
+  align-self: flex-end;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 7px;
+}
+
+.expenses-root {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+.expense {
+  display: flex;
+  width: 733px;
+  font-size: 1.5rem;
+  align-items: center;
+  padding: 7px;
+}
+
+.expense:hover {
+  box-shadow: 0 0 1px 1px black;
+}
+
+.shop {
+  width: 55%;
+}
+
+.date-amount-wrapper {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+
+.date {
+  width: 160px;
+}
+
+.amount {
+  width: 90px;
+}
+
+.buttons {
+  margin-right: 0;
+  width: 109px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit {
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+}
+
+.edit img {
+  width: 30px;
+  height: 30px;
+}
+
+.edit:hover {
+  cursor: pointer;
+}
+
+.delete {
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+}
+
+.delete img {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.delete:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 780px) {
+  .content-wrapper {
+    width: 90vw;
+  }
+  
+  .inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .print-shop, .print-amount {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .print-shop input {
+    width: calc(100% - 24px);
+    margin-top: 5px;
+  }
+
+  .print-amount input {
+    width: calc(100% - 24px);
+    margin-top: 5px;
+  }
+
+  .inputs-wrapper button {
+    align-self: flex-end;
+    width: 200px;
+    height: 35px;
+  }
+
+  .expenses-root {
+    width: 100%;
+  }
+
+  .expense {
+    width: 100%;
+  }
+
+  .shop {
+    width: 70%;
+  }
+
+  .date-amount-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-items: flex-start;
+    padding-right: 13px;
+  }
+
+  .date {
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: end;
+    margin-top: 5px;
+  }
+
+  .amount {
+    width: 100%;
+    margin: 5px 0;
+    text-align: end;
+  }
+
+  .buttons {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  .buttons img {
+    width: 40px;
+    height: 40px;
+  }
+}
