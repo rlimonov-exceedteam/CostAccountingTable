@@ -1,7 +1,7 @@
 let notes = [];
 let divsArray = [];
 
-const getFromServer = async (notes) => {
+const getFromServer = async () => {
   const response = await fetch('http://localhost:8000/allNotes', {
     method: 'GET',
   });
@@ -14,11 +14,7 @@ const getFromServer = async (notes) => {
     alert(`Error HTTP: ${response.status}`);
     return;
   }
-
-  result.data.forEach(elem => {
-    notes.push(elem);
-  })
-
+  notes = result.data;
   render();
 }
 
@@ -37,7 +33,7 @@ const postOnServer = async (shop, amount, date) => {
   });
   const result = await response.json();
 
-  if(response.ok) {
+  if (response.ok) {
     notes.push({
       shop,
       date,
@@ -45,9 +41,9 @@ const postOnServer = async (shop, amount, date) => {
       _id: result._id,
     });
 
-    render();
     document.getElementsByClassName('print-shop')[0].children[1].value = null;
     document.getElementsByClassName('print-amount')[0].children[1].value = null;
+    render();
   } else {
     alert(`Error HTTP: ${response.status}`);
   }
@@ -76,9 +72,9 @@ const patchOnServer = async (shop, amount, date, _id) => {
         elem.shop = shop;
         elem.amount = amount;
         elem.date = date;
-        render();
       }
     });
+    render();
   }
 }
 
@@ -97,11 +93,10 @@ const deleteFromServer = async (_id) => {
 
 const render = () => {
   divsArray = [];
-  const length = notes.length;
 
   notes.forEach((el, i) => {
-    const { shop, date, amount } = el;
-    const div = `<div class="expense">
+    const { _id, shop, date, amount } = el;
+    const div = `<div class="expense" id=${_id}>
                   <div class="shop">
                     <p>
                     ${i + 1}. 
@@ -167,7 +162,11 @@ const editNote = (event) => {
   
   editButton.onclick = async () => {
     notes.forEach(elem => {
-      if (elem.shop === previousShopName && elem.amount === previousAmount && elem.date === previousDate) {
+      if (
+          elem.shop === previousShopName && 
+          elem.amount === previousAmount && 
+          elem.date === previousDate
+        ) {
         const date = new Date(dateInput.value);
         const newDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
         const _id = elem._id;
@@ -184,14 +183,11 @@ const deleteNote = (event) => {
   const date = parentDiv.children[1].children[0].value;
   const amountData = parentDiv.children[1].children[1].value;
   const amount = amountData.substring(0, amountData.indexOf(' '));
-
-  notes.forEach((elem, i) => {
-    if (elem.shop === shop && elem.amount === amount && elem.date === date) {
-      deleteFromServer(elem._id);
-    }
-  });
+  const _id = parentDiv.id;
+  
+  deleteFromServer(_id);
 } 
 
 window.onload = async () => {
-  getFromServer(notes);
+  getFromServer();
 }
