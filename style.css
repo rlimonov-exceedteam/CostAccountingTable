@@ -113,27 +113,67 @@ body {
   box-shadow: 0 0 1px 1px black;
 }
 
+.editable-data {
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+  background: none;
+  color: black;
+  width: 80%;
+}
+
+.ready-to-edit {
+  background-color: white;
+  box-shadow: 0 0 1px 1px grey;
+}
+
 .shop {
-  width: 55%;
+  width: 45%;
+  display: flex;
+  align-items: center;
+}
+
+.shop p {
+  width: fit-content;
+}
+
+.shop input {
+  width: 100%;
+  height: fit-content;
 }
 
 .date-amount-wrapper {
   display: flex;
-  width: 50%;
+  width: 55%;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .date {
-  width: 160px;
+  width: 180px;
+  margin-left: 5px;
+}
+
+.date::-webkit-datetime-edit {
+  font-size:1.5rem;
+}
+
+.date::-webkit-calendar-picker-indicator {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
 }
 
 .amount {
-  width: 90px;
+  width: 120px;
+  margin-left: 6px;
 }
 
 .buttons {
   margin-right: 0;
-  width: 109px;
+  width: 85px;
+  justify-self: flex-end;
   display: flex;
   justify-content: flex-end;
 }
@@ -215,16 +255,24 @@ body {
 
   .expense {
     width: 100%;
+    justify-content: space-between;
   }
 
   .shop {
-    width: 70%;
+    width: 58%;
+    position: relative;
+    top: -9px;
+  }
+
+  .shop input {
+    width: 90%;
+    height: fit-content;
   }
 
   .date-amount-wrapper {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 38%;
     align-items: flex-start;
     padding-right: 13px;
   }
@@ -232,6 +280,7 @@ body {
   .date {
     width: 100%;
     margin-bottom: 5px;
+    margin-left: 0;
     text-align: end;
     margin-top: 5px;
   }
@@ -239,6 +288,7 @@ body {
   .amount {
     width: 100%;
     margin: 5px 0;
+    padding: 0;
     text-align: end;
   }
 
