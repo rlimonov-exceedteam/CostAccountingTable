@@ -104,8 +104,7 @@ const deleteNote = (event, id) => {
   const amountData = parentDiv.children[1].children[1].value;
   const amount = amountData.substring(0, amountData.indexOf(' '));
 
-  const result = notes.filter(elem => elem.id === id);
-  notes.splice(notes.indexOf(result[0]), 1)
+  notes = notes.filter(elem => elem.id !== id);
   render();
 }
     
