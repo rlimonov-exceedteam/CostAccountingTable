@@ -1,12 +1,13 @@
 const notes = [];
 let divsArray = [];
+let id = 0;
 
 const render = () => {
   divsArray = [];
   const length = notes.length;
 
   notes.forEach((el, i) => {
-    const { shop, date, amount } = el;
+    const { shop, date, amount, id } = el;
     const div = `<div class="expense">
                   <div class="shop">
                     <p>
@@ -21,7 +22,7 @@ const render = () => {
                       <button class="edit" onclick="editNote(event)">
                         <img src="images/edit-icon.png">
                       </button>
-                      <button class="delete">
+                      <button class="delete" onclick="deleteNote(event, ${id})">
                         <img src="images/trash-icon.png">
                       </button>
                     </div>
@@ -45,6 +46,7 @@ const addNote = (event) => {
     shop: shopInput.value,
     date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
     amount: amountInput.value,
+    id: ++id,
   });
 
   render();
@@ -93,5 +95,16 @@ const editNote = (event) => {
       }
     });
   }
+}
+
+const deleteNote = (event, id) => {
+  const parentDiv = event.target.parentElement.parentElement.parentElement.parentElement;
+  const shop = parentDiv.children[0].children[1].value;
+  const date = parentDiv.children[1].children[0].value;
+  const amountData = parentDiv.children[1].children[1].value;
+  const amount = amountData.substring(0, amountData.indexOf(' '));
+
+  notes = notes.filter(elem => elem.id !== id);
+  render();
 }
     
