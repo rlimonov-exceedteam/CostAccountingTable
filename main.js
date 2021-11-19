@@ -6,16 +6,17 @@ const render = () => {
   const length = notes.length;
 
   notes.forEach((el, i) => {
+    const { shop, date, amount } = el;
     const div = `<div class="expense">
                   <div class="shop">
                     <p>
-                    ${length - i}. 
+                    ${i + 1}. 
                     </p>
-                    <input class="editable-data" disabled type="text" value='${el.shop}'></input>
+                    <input class="editable-data" disabled type="text" value='${shop}'></input>
                   </div>
                   <div class="date-amount-wrapper">
-                    <input class="date editable-data" disabled type="text" value="${el.date}"></input>
-                    <input class="amount editable-data" disabled type="text" value="${el.amount} р."></input>
+                    <input class="date editable-data" disabled type="text" value="${date}"></input>
+                    <input class="amount editable-data" disabled type="text" value="${amount} р."></input>
                     <div class="buttons">
                       <button class="edit" onclick="editNote(event)">
                         <img src="images/edit-icon.png">
@@ -27,7 +28,7 @@ const render = () => {
                   </div>
                 </div>`;
 
-    divsArray.unshift(div);
+    divsArray.push(div);
   });
 
   const allDivs = divsArray.join('');
@@ -35,15 +36,16 @@ const render = () => {
 }  
 
 const addNote = (event) => {
-  const shopName = event.target.parentElement.children[0].children[1].value;
-  const amount = event.target.parentElement.children[1].children[1].value;
+  const parentDiv = event.target.parentElement;
+  const [, shopInput] = parentDiv.children[0].children;
+  const [, amountInput] = parentDiv.children[1].children;
   const date = new Date();
 
   notes.push({
-    shop: shopName,
+    shop: shopInput.value,
     date: `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`,
-    amount,
-   });
+    amount: amountInput.value,
+  });
 
   render();
   document.getElementsByClassName('print-shop')[0].children[1].value = null;
@@ -54,7 +56,7 @@ const editNote = (event) => {
   const parentDiv = event.target.parentElement.parentElement.parentElement.parentElement;
   const [, shopInput] = parentDiv.children[0].children;
   const [dateInput, amountInput] = parentDiv.children[1].children;
-  const editButton = parentDiv.children[1].children[2].children[0];
+  const [editButton, ] = parentDiv.children[1].children[2].children;
   const date = new Date();
 
   const previousShopName = shopInput.value;
@@ -76,8 +78,11 @@ const editNote = (event) => {
   
   editButton.onclick = async () => {
     notes.forEach(elem => {
-
-      if (elem.shop === previousShopName && elem.amount === previousAmount && elem.date === previousDate) {
+      if (
+        elem.shop === previousShopName && 
+        elem.amount === previousAmount && 
+        elem.date === previousDate
+      ) {
         const date = new Date(dateInput.value);
         
         elem.shop = shopInput.value;
