@@ -94,4 +94,19 @@ const editNote = (event) => {
     });
   }
 }
+
+const deleteNote = (event) => {
+  const parentDiv = event.target.parentElement.parentElement.parentElement.parentElement;
+  const shop = parentDiv.children[0].children[1].value;
+  const date = parentDiv.children[1].children[0].value;
+  const amountData = parentDiv.children[1].children[1].value;
+  const amount = amountData.substring(0, amountData.indexOf(' '));
+
+  notes.forEach((elem, i) => {
+    if (elem.shop === shop && elem.amount === amount && elem.date === date) {
+      notes.splice(i, 1);
+      render();
+    }
+  });
+}
     
