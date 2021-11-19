@@ -7,7 +7,7 @@ const render = () => {
   const length = notes.length;
 
   notes.forEach((el, i) => {
-    const { shop, date, amount } = el;
+    const { shop, date, amount, id } = el;
     const div = `<div class="expense">
                   <div class="shop">
                     <p>
@@ -22,7 +22,7 @@ const render = () => {
                       <button class="edit" onclick="editNote(event)">
                         <img src="images/edit-icon.png">
                       </button>
-                      <button class="delete" onclick="deleteNote(event, id)">
+                      <button class="delete" onclick="deleteNote(event, ${id})">
                         <img src="images/trash-icon.png">
                       </button>
                     </div>
