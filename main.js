@@ -1,10 +1,9 @@
 let notes = [];
 
 const printTotalAmount = () => {
-  let total = 0;
-  notes.forEach(elem => {
-    total += +elem.amount;
-  });
+  let total = notes.reduce((previous, next) => {
+    previous += next;
+  })
   document.getElementsByClassName('total-expenses')[0].innerHTML = `Итого: ${total} р.`;
 }
 
@@ -194,17 +193,12 @@ const editNote = (event) => {
   }
 
   undoButton.onclick = async () => {
-    console.log('aaa')
-    notes.forEach(elem => {
-      if (elem._id === _id) {
-        patchOnServer(
-                      previousShopName, 
-                      previousAmount, 
-                      previousDate, 
-                      _id
-                      );
-        }
-    });
+    patchOnServer(
+                  previousShopName, 
+                  previousAmount, 
+                  previousDate, 
+                  _id
+                  );
   }
 }
 
@@ -239,7 +233,7 @@ const editOneDate = (event) => {
   elementHTML.onblur = async () => {
 
     notes.forEach(elem => {
-      if (elem._id === _id) {
+      if ({_id} = elem) {
         const date = new Date(elementHTML.value);
         const newDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
         patchOnServer(elem.shop, elem.amount, newDate, _id);
@@ -261,14 +255,16 @@ const editOneAmount = (event) => {
   elementHTML.type = 'number';
 
   elementHTML.onblur = async () => {
-    notes.forEach(elem => {
-      if (elem._id === _id) {
-        patchOnServer(elem.shop, elementHTML.value, elem.date, _id);
-      }
-
-      elementHTML.disabled = true;
-      elementHTML.classList.remove('ready-to-edit');
-    });
+    const elementInArray = notes.find(elem => elem._id === _id); 
+    patchOnServer(
+                  elementInArray.shop, 
+                  elementHTML.value, 
+                  elementInArray.date, 
+                  _id
+                  );
+      
+    elementHTML.disabled = true;
+    elementHTML.classList.remove('ready-to-edit');
   }
 }
 
