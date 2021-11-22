@@ -1,9 +1,9 @@
 let notes = [];
 
 const printTotalAmount = () => {
-  let total = notes.reduce((previous, next) => {
-    previous += next;
-  })
+  const total = notes.reduce((previous, next) => {
+    return previous + Number(next.amount);
+  }, 0);
   document.getElementsByClassName('total-expenses')[0].innerHTML = `Итого: ${total} р.`;
 }
 
@@ -193,12 +193,7 @@ const editNote = (event) => {
   }
 
   undoButton.onclick = async () => {
-    patchOnServer(
-                  previousShopName, 
-                  previousAmount, 
-                  previousDate, 
-                  _id
-                  );
+    patchOnServer(previousShopName, previousAmount, previousDate, _id);
   }
 }
 
@@ -233,7 +228,7 @@ const editOneDate = (event) => {
   elementHTML.onblur = async () => {
 
     notes.forEach(elem => {
-      if ({_id} = elem) {
+      if ({_id} === elem) {
         const date = new Date(elementHTML.value);
         const newDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
         patchOnServer(elem.shop, elem.amount, newDate, _id);
@@ -256,12 +251,7 @@ const editOneAmount = (event) => {
 
   elementHTML.onblur = async () => {
     const elementInArray = notes.find(elem => elem._id === _id); 
-    patchOnServer(
-                  elementInArray.shop, 
-                  elementHTML.value, 
-                  elementInArray.date, 
-                  _id
-                  );
+    patchOnServer(elementInArray.shop, elementHTML.value, elementInArray.date, _id);
       
     elementHTML.disabled = true;
     elementHTML.classList.remove('ready-to-edit');
@@ -270,12 +260,8 @@ const editOneAmount = (event) => {
 
 const deleteNote = (event) => {
   const parentDiv = event.target.parentElement.parentElement.parentElement.parentElement;
-  const shop = parentDiv.children[0].children[1].value;
-  const date = parentDiv.children[1].children[0].value;
-  const amountData = parentDiv.children[1].children[1].value;
-  const amount = amountData.substring(0, amountData.indexOf(' '));
   const _id = parentDiv.id;
-  
+
   deleteFromServer(_id);
 } 
 
