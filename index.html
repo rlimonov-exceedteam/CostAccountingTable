@@ -9,25 +9,27 @@
   </head>
   <body>
     <div class="content-wrapper">
-      <p class="title">
-        Учет расходов
-      </p>
-      <div class="inputs-wrapper">
-        <div class="print-shop">
-          <p>Куда было потрачено:</p>
-          <input type="text" placeholder="Куда было потрачено">
+      <div class="header">
+        <p class="title">
+          Учет расходов
+        </p>
+        <div class="inputs-wrapper">
+          <div class="print-shop">
+            <p>Куда было потрачено:</p>
+            <input type="text" placeholder="Куда было потрачено">
+          </div>
+          <div class="print-amount">
+            <p>Сколько было потрачено:</p>
+            <input type="number" placeholder="Сколько было потрачено">
+          </div>
+          <button class="submit" onclick="addNote(event)">
+            Добавить
+          </button>
         </div>
-        <div class="print-amount">
-          <p>Сколько было потрачено:</p>
-          <input type="number" placeholder="Сколько было потрачено">
-        </div>
-        <button class="submit" onclick="addNote(event)">
-          Добавить
-        </button>
+        <p class="total-expenses">
+          Итого: 0000 р.
+        </p>
       </div>
-      <p class="total-expenses">
-        Итого: 0000 р.
-      </p>
       <div class="expenses-root">
 
       </div>
